@@ -1,12 +1,12 @@
 import fastify from "fastify"
-import { knex } from "./database"
+import { transactions } from "./routes/transactions"
 
 const app = fastify()
-app.get('/', async () => {
-    const k = knex('sqlite_schema').select('*')
-    return k
+
+app.register(transactions, {
+    prefix: 'transactions'
 })
 
 app.listen({
-    port:3333
+    port: 3333
 }).then(() => console.log("running server !"))

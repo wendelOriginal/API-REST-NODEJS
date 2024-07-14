@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "tsx watch src/serve.ts",
     "lint": "eslint src --ext .ts --fix",
-    "knex": "ts-node ./node_modules/.bin/knex"
+    "knex": "node ./node_modules/.bin/knex"
   },
   "keywords": [],
   "author": "",
@@ -13,14 +13,17 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^20.14.10",
-    "eslint": "^9.6.0",
+    "eslint": "^9.7.0",
+    "globals": "^15.8.0",
     "sqlite3": "^5.1.7",
     "ts-node": "^10.9.2",
     "tsx": "^4.16.2",
     "typescript": "^5.5.3"
   },
   "dependencies": {
+    "dotenv": "^16.4.5",
     "fastify": "^4.28.1",
-    "knex": "^3.1.0"
+    "knex": "^3.1.0",
+    "zod": "^3.23.8"
   }
 }
