@@ -1,10 +1,12 @@
 import fastify from "fastify"
 import { transactions } from "./routes/transactions"
+import cookie from '@fastify/cookie'
+
 
 const app = fastify()
-
+app.register(cookie)
 app.register(transactions, {
-    prefix: 'transactions'
+    prefix: 'transactions/'
 })
 
 app.listen({
