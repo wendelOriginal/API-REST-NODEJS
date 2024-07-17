@@ -7,9 +7,9 @@ import { checkSessionId } from '../middlewares/check-session-id'
 
 export const transactions = async (app: FastifyInstance) =>{
 
-    app.get('/', {
-        preHandler: [checkSessionId]
-    }, async (request) => {
+    app.addHook('preHandler',checkSessionId)
+
+    app.get('/', async (request) => {
 
         const session = request.cookies.sessionId
         const transactions = await knex('transactions').select().where('session_id', session)
@@ -18,9 +18,7 @@ export const transactions = async (app: FastifyInstance) =>{
     })
 
 
-    app.get('/sumary',{
-        preHandler: [checkSessionId]
-    }, async (request, reply) => {
+    app.get('/sumary', async (request, reply) => {
 
         const session = request.cookies.sessionId
 
@@ -28,9 +26,7 @@ export const transactions = async (app: FastifyInstance) =>{
         return reply.status(200).send({sumary})
     })
 
-    app.get('/:id', {
-        preHandler: checkSessionId
-    }, async (request) => {
+    app.get('/:id', async (request) => {
 
         const validate = z.object({
             id: z.string().uuid()
